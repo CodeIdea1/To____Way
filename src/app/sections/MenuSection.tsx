@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from '../styles/menu.module.css';
 
 const menuCategories = [
@@ -69,6 +69,28 @@ const menuCategories = [
 
 export default function MenuSection() {
   const [showAll, setShowAll] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleToggle = () => {
+    if (showAll) {
+      setIsAnimating(true);
+      
+      // Scroll سلس للأعلى لبداية السيكشن
+      sectionRef.current?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+      
+      // انتظار انتهاء الـ scroll ثم إخفاء العناصر
+      setTimeout(() => {
+        setShowAll(false);
+        setIsAnimating(false);
+      }, 600);
+    } else {
+      setShowAll(true);
+    }
+  };
   
   const initialItems = [
     ...menuCategories[0].items.slice(0, 3),
@@ -77,7 +99,7 @@ export default function MenuSection() {
   ];
 
   return (
-    <section className={styles.menu}>
+    <section ref={sectionRef} className={styles.menu}>
       <div className={styles.container}>
         <div className={styles.header}>
           <img src="/badge.svg" alt="badge" className={styles.badge} />
@@ -164,7 +186,11 @@ export default function MenuSection() {
         )}
 
         <div className={styles.buttonContainer}>
-          <button className={styles.viewButton} onClick={() => setShowAll(!showAll)}>
+          <button 
+            className={`${styles.viewButton} ${isAnimating ? styles.animating : ''}`} 
+            onClick={handleToggle}
+            disabled={isAnimating}
+          >
             {showAll ? 'Show Less' : 'View Full Menu'}
           </button>
         </div>

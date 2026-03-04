@@ -4,7 +4,7 @@ import JourneySection from "./sections/JourneySection";
 import MenuSection from "./sections/MenuSection";
 import HoursSection from "./sections/HoursSection";
 import TestimonialsSection from "./sections/TestimonialsSection";
-import Testimonials2Section from "./sections/Testimonials2Section";
+// import Testimonials2Section from "./sections/Testimonials2Section";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <div id="menu"><MenuSection/></div>
       <div id="hours"><HoursSection/></div>
       <div id="testimonials"><TestimonialsSection/></div>
-      <div id="testimonials2"><Testimonials2Section/></div>
+      {/* <div id="testimonials2"><Testimonials2Section/></div> */}
     </div>
   );
 }
