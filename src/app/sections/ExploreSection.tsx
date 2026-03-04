@@ -124,6 +124,7 @@ export default function ExploreSection() {
         }
       });
 
+      
       tl.to(cups[0], { y: 0, duration: 2 })
         .to(cups[0], { y: '-150%', scale: 0.8, opacity: 0, duration: 1, ease: 'back.in(1.2)' })
         .to(cups[1], { 
@@ -199,6 +200,7 @@ export default function ExploreSection() {
             <img ref={(el) => { if (el) cupsRef.current[3] = el; }} src="/cup4-1.svg" alt="cup" className={styles.cupImage} />
           </div>
         </div>
+
 
         <div className={styles.column}>
           <div className={styles.item}>
