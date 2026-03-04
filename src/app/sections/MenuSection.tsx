@@ -116,7 +116,7 @@ export default function MenuSection() {
   ];
 
   return (
-    <section ref={sectionRef} className={styles.menu}>
+    <section ref={sectionRef} className={styles.menu} id="menu-section">
       <div className={styles.container}>
         <div className={styles.header}>
           <img src="/badge.svg" alt="badge" className={styles.badge} />

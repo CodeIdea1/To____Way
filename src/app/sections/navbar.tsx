@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import styles from '../styles/navbar.module.css';
+import { smoothNavigate } from '../utils/smoothNavigate';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,8 +15,7 @@ export default function Navbar() {
     setIsOpen(false);
     
     setTimeout(() => {
-      const element = document.querySelector(targetId);
-      element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      smoothNavigate(targetId);
     }, 700);
   };
 

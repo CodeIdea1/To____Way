@@ -3,11 +3,16 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/herosection.module.css';
+import { smoothNavigate } from '../utils/smoothNavigate';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const scrollToMenu = () => {
+    smoothNavigate('#menu-section');
+  };
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -50,7 +55,7 @@ export default function HeroSection() {
         <p className={styles.description}>
           Experience the joy of exceptional coffee in our cozy space, where every cup is crafted with passion and warmth
         </p>
-        <button className={styles.button}>Our menu</button>
+        <button className={styles.button} onClick={scrollToMenu}>Our menu</button>
       </div>
     </section>
   );
