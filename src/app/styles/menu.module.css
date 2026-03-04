@@ -47,20 +47,21 @@
   gap: 60px;
 }
 
+.columns.initial .item {
+  opacity: 1;
+  animation: none;
+}
+
 .fullMenu {
   display: flex;
   flex-direction: column;
   gap: 80px;
-  animation: fadeIn 0.6s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.fullMenu.show {
+  opacity: 1;
 }
 
 .categorySection {
@@ -101,8 +102,10 @@
   display: flex;
   align-items: flex-start;
   gap: 15px;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
+}
+
+.fullMenu.show .item {
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 @keyframes fadeInUp {
@@ -116,12 +119,12 @@
   }
 }
 
-.item:nth-child(1) { animation-delay: 0.1s; }
-.item:nth-child(2) { animation-delay: 0.2s; }
-.item:nth-child(3) { animation-delay: 0.3s; }
-.item:nth-child(4) { animation-delay: 0.4s; }
-.item:nth-child(5) { animation-delay: 0.5s; }
-.item:nth-child(n+6) { animation-delay: 0.6s; }
+.fullMenu.show .item:nth-child(1) { animation-delay: 0.05s; }
+.fullMenu.show .item:nth-child(2) { animation-delay: 0.1s; }
+.fullMenu.show .item:nth-child(3) { animation-delay: 0.15s; }
+.fullMenu.show .item:nth-child(4) { animation-delay: 0.2s; }
+.fullMenu.show .item:nth-child(5) { animation-delay: 0.25s; }
+.fullMenu.show .item:nth-child(n+6) { animation-delay: 0.3s; }
 
 .itemImage {
   width: 60px;

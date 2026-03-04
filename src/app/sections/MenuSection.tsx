@@ -75,18 +75,14 @@ export default function MenuSection() {
   const handleToggle = () => {
     if (showAll) {
       setIsAnimating(true);
-      
-      // Scroll سلس للأعلى لبداية السيكشن
       sectionRef.current?.scrollIntoView({ 
         behavior: 'smooth', 
         block: 'start' 
       });
-      
-      // انتظار انتهاء الـ scroll ثم إخفاء العناصر
       setTimeout(() => {
         setShowAll(false);
         setIsAnimating(false);
-      }, 600);
+      }, 500);
     } else {
       setShowAll(true);
     }
@@ -111,7 +107,7 @@ export default function MenuSection() {
         </div>
 
         {!showAll ? (
-          <div className={styles.columns}>
+          <div className={`${styles.columns} ${styles.initial}`}>
             <div className={styles.column}>
               {initialItems.slice(0, 5).map((item, index) => (
                 <div key={index} className={styles.item}>
@@ -144,7 +140,7 @@ export default function MenuSection() {
             </div>
           </div>
         ) : (
-          <div className={styles.fullMenu}>
+          <div className={`${styles.fullMenu} ${!isAnimating ? styles.show : ''}`}>
             {menuCategories.map((category, catIndex) => (
               <div key={catIndex} className={styles.categorySection}>
                 <h3 className={styles.categoryTitle}>{category.category}</h3>

@@ -197,7 +197,7 @@ export default function ExploreSection() {
             <img ref={(el) => { if (el) cupsRef.current[0] = el; }} src="/cup1-1.svg" alt="cup" className={styles.cupImage} />
             <img ref={(el) => { if (el) cupsRef.current[1] = el; }} src="/cup2-1.svg" alt="cup" className={styles.cupImage} />
             <img ref={(el) => { if (el) cupsRef.current[2] = el; }} src="/cup3-1.svg" alt="cup" className={styles.cupImage} />
-            <img ref={(el) => { if (el) cupsRef.current[3] = el; }} src="/cup4-1.svg" alt="cup" className={styles.cupImage} />
+            <img ref={(el) => { if (el) cupsRef.current[3] = el; }} src="/cupp4-1.svg" alt="cup" className={styles.cupImage} />
           </div>
         </div>
 
