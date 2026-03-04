@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/explore.module.css';
+import { cloudinaryImages } from '../utils/cloudinaryImages';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,7 +113,7 @@ export default function ExploreSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top top',
+          start: isMobile ? '20% top' : 'top top',
           end: isMobile ? '+=400%' : '+=600%',
           pin: true,
           scrub: 1,
@@ -176,14 +177,14 @@ export default function ExploreSection() {
       <div className={styles.container}>
         <div className={styles.column}>
           <div className={styles.item}>
-            <img src="/coffee-1.svg" alt="coffee" className={styles.icon} />
+            <img src={cloudinaryImages['coffee-1.svg']} alt="coffee" className={styles.icon} />
             <h3 className={styles.title}>Rich Espresso Blends</h3>
             <p className={styles.description}>
               Indulge in the deep, robust flavors of our expertly crafted espresso blends. Perfect for a quick pick-me-up or a leisurely afternoon treat.
             </p>
           </div>
           <div className={styles.item}>
-            <img src="/coffee-2.svg" alt="coffee" className={styles.icon} />
+            <img src={cloudinaryImages['coffee-2.svg']} alt="coffee" className={styles.icon} />
             <h3 className={styles.title}>Classic Drip Coffee</h3>
             <p className={styles.description}>
               Enjoy the comforting taste of our classic drip coffee, brewed to perfection. A timeless choice for coffee enthusiasts who appreciate simplicity.
@@ -194,24 +195,24 @@ export default function ExploreSection() {
         <div className={styles.columnCenter}>
           <div className={styles.cupContainer}>
             <canvas ref={canvasRef} className={styles.splashCanvas} />
-            <img ref={(el) => { if (el) cupsRef.current[0] = el; }} src="/cup1-1.svg" alt="cup" className={styles.cupImage} />
-            <img ref={(el) => { if (el) cupsRef.current[1] = el; }} src="/cup2-1.svg" alt="cup" className={styles.cupImage} />
-            <img ref={(el) => { if (el) cupsRef.current[2] = el; }} src="/cup3-1.svg" alt="cup" className={styles.cupImage} />
-            <img ref={(el) => { if (el) cupsRef.current[3] = el; }} src="/cupp4-1.svg" alt="cup" className={styles.cupImage} />
+            <img ref={(el) => { if (el) cupsRef.current[0] = el; }} src={cloudinaryImages['cup1-1.svg']} alt="cup" className={styles.cupImage} />
+            <img ref={(el) => { if (el) cupsRef.current[1] = el; }} src={cloudinaryImages['cup2-1.svg']} alt="cup" className={styles.cupImage} />
+            <img ref={(el) => { if (el) cupsRef.current[2] = el; }} src={cloudinaryImages['cup3-1.svg']} alt="cup" className={styles.cupImage} />
+            <img ref={(el) => { if (el) cupsRef.current[3] = el; }} src={cloudinaryImages['cupp4-1.svg']} alt="cup" className={styles.cupImage} />
           </div>
         </div>
 
 
         <div className={styles.column}>
           <div className={styles.item}>
-            <img src="/coffee-3.svg" alt="coffee" className={styles.icon} />
+            <img src={cloudinaryImages['coffee-3.svg']} alt="coffee" className={styles.icon} />
             <h3 className={styles.title}>Smooth Cold Brews</h3>
             <p className={styles.description}>
               Refresh yourself with our smooth and invigorating cold brew options. Ideal for those warm days when you need a cool, caffeinated boost.
             </p>
           </div>
           <div className={styles.item}>
-            <img src="/coffee-4.svg" alt="coffee" className={styles.icon} />
+            <img src={cloudinaryImages['coffee-4.svg']} alt="coffee" className={styles.icon} />
             <h3 className={styles.title}>Flavorful Latte Varieties</h3>
             <p className={styles.description}>
               Experience the rich and creamy flavors of our diverse latte selections. From vanilla to caramel, we have a latte to suit every taste.
