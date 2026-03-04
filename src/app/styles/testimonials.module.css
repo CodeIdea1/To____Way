@@ -1,0 +1,144 @@
+.testimonials {
+  min-height: 70vh;
+  background: white;
+  padding: 80px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.container {
+  width: 83%;
+  margin: 0 auto;
+  position: relative;
+  padding:  0 190px;
+}
+
+.quoteIcon {
+  color: black;
+  font-size: 4rem;
+  margin: 0 auto 40px;
+  display: block;
+  text-align: center;
+}
+
+.testimonial {
+  text-align: center;
+  padding: 0 60px;
+}
+
+.quote {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: #232323;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.author {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0F0E0E;
+  margin-bottom: 5px;
+  font-family: var(--font-cormorant_upright);
+}
+
+.role {
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  padding: 10px;
+}
+
+.navButton:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prevButton {
+  left: 0;
+}
+
+.nextButton {
+  right: 0;
+}
+
+.navButton svg {
+  font-size: 3.3rem;
+  font-weight: 100;
+  stroke-width: 0.5;
+}
+
+.navButton.active svg {
+  color: #000;
+}
+
+.navButton.inactive svg {
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 50px 20px;
+    min-height: 60vh;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 50px;
+  }
+
+  .quoteIcon {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+  }
+
+  .testimonial {
+    padding: 0 10px;
+  }
+
+  .stars {
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+
+  .star {
+    font-size: 1.3rem;
+  }
+
+  .quote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .author {
+    font-size: 1.2rem;
+  }
+
+  .role {
+    font-size: 0.9rem;
+  }
+
+  .navButton svg {
+    font-size: 2rem;
+  }
+
+  .prevButton {
+    left: -5px;
+  }
+
+  .nextButton {
+    right: -5px;
+  }
+}

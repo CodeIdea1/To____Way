@@ -1,0 +1,130 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:50px 140px;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: var(--font-cormorant_upright);
+}
+
+.logoGold {
+  color: var(--primary-color);
+}
+
+.logoWhite {
+  color: white;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 101;
+}
+
+.hamburger {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center;
+}
+
+.hamburger span:nth-child(2) {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.menuButton.open .hamburger span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menuButton.open .hamburger span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.menuButton.open .hamburger span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0F0E0E;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.menuList li {
+  margin: 30px 0;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.menuList a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-family: var(--font-cormorant_upright);
+  transition: opacity 0.3s;
+}
+
+.menuList a:hover {
+  opacity: 0.7;
+}
+
+
+
+@media (max-width: 768px) {
+  .navbar {
+  padding:20px;
+  }
+  
+  .hamburger {
+    width: 25px;
+    height: 16px;
+  }
+  
+  .menuButton.open .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .menuButton.open .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
