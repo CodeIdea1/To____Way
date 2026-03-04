@@ -70,7 +70,6 @@ export default function JourneySection() {
               </h2>
               <img src={cloudinaryImages['separator-white.svg']} alt="separator" className={styles.separator} />
               <p className={styles.description}>{item.description}</p>
-              <button className={styles.button}>See more</button>
             </div>
             <div className={styles.imageContainer}>
               <img src={item.image} alt={item.title} className={styles.image} />
