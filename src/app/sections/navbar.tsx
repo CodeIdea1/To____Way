@@ -5,6 +5,7 @@ import styles from '../styles/navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [wayColor, setWayColor] = useState('white');
   const menuRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLLIElement[]>([]);
 
@@ -17,6 +18,41 @@ export default function Navbar() {
       element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 700);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      let currentColor = 'white';
+      
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          const styles = window.getComputedStyle(section);
+          let bgColor = styles.backgroundColor;
+          
+          if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+            let parent = section.parentElement;
+            while (parent && (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent')) {
+              bgColor = window.getComputedStyle(parent).backgroundColor;
+              parent = parent.parentElement;
+            }
+          }
+          
+          const rgb = bgColor.match(/\d+/g);
+          if (rgb && rgb.length >= 3) {
+            const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+            currentColor = brightness > 128 ? 'black' : 'white';
+          }
+        }
+      });
+      
+      setWayColor(currentColor);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (menuRef.current) {
@@ -55,7 +91,7 @@ export default function Navbar() {
       <nav className={styles.navbar}>
         <div className={styles.logo}>
           <span className={styles.logoGold}>To</span>{' '}
-          <span className={styles.logoWhite}>way</span>
+          <span style={{ color: wayColor, transition: 'color 0.3s ease' }}>way</span>
         </div>
         <button 
           onClick={() => setIsOpen(!isOpen)}

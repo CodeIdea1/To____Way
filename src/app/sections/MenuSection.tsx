@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from '../styles/menu.module.css';
 
 const menuCategories = [
@@ -71,20 +71,41 @@ export default function MenuSection() {
   const [showAll, setShowAll] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showAll && contentRef.current) {
+      contentRef.current.style.maxHeight = contentRef.current.scrollHeight + 'px';
+    }
+  }, [showAll]);
 
   const handleToggle = () => {
     if (showAll) {
       setIsAnimating(true);
-      sectionRef.current?.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      });
+      
+      if (contentRef.current) {
+        contentRef.current.style.maxHeight = '0px';
+      }
+      
+      setShowAll(false);
+      
       setTimeout(() => {
-        setShowAll(false);
+        if (sectionRef.current) {
+          const headerOffset = -100;
+          const elementPosition = sectionRef.current.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
         setIsAnimating(false);
-      }, 500);
+      }, 700);
     } else {
       setShowAll(true);
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 600);
     }
   };
   
@@ -106,41 +127,44 @@ export default function MenuSection() {
           <img src="/separator-accent.svg" alt="separator" className={styles.separator} />
         </div>
 
-        {!showAll ? (
-          <div className={`${styles.columns} ${styles.initial}`}>
-            <div className={styles.column}>
-              {initialItems.slice(0, 5).map((item, index) => (
-                <div key={index} className={styles.item}>
-                  <img src={item.image} alt={item.name} className={styles.itemImage} />
-                  <div className={styles.itemContent}>
-                    <div className={styles.itemHeader}>
-                      <span className={styles.itemName}>{item.name}</span>
-                      <div className={styles.itemDots}></div>
-                      <span className={styles.itemPrice}>{item.price}</span>
-                    </div>
-                    <p className={styles.itemDescription}>{item.description}</p>
+        <div className={styles.columns}>
+          <div className={styles.column}>
+            {initialItems.slice(0, 5).map((item, index) => (
+              <div key={index} className={styles.item}>
+                <img src={item.image} alt={item.name} className={styles.itemImage} />
+                <div className={styles.itemContent}>
+                  <div className={styles.itemHeader}>
+                    <span className={styles.itemName}>{item.name}</span>
+                    <div className={styles.itemDots}></div>
+                    <span className={styles.itemPrice}>{item.price}</span>
                   </div>
+                  <p className={styles.itemDescription}>{item.description}</p>
                 </div>
-              ))}
-            </div>
-            <div className={styles.column}>
-              {initialItems.slice(5, 10).map((item, index) => (
-                <div key={index} className={styles.item}>
-                  <img src={item.image} alt={item.name} className={styles.itemImage} />
-                  <div className={styles.itemContent}>
-                    <div className={styles.itemHeader}>
-                      <span className={styles.itemName}>{item.name}</span>
-                      <div className={styles.itemDots}></div>
-                      <span className={styles.itemPrice}>{item.price}</span>
-                    </div>
-                    <p className={styles.itemDescription}>{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ) : (
-          <div className={`${styles.fullMenu} ${!isAnimating ? styles.show : ''}`}>
+          <div className={styles.column}>
+            {initialItems.slice(5, 10).map((item, index) => (
+              <div key={index} className={styles.item}>
+                <img src={item.image} alt={item.name} className={styles.itemImage} />
+                <div className={styles.itemContent}>
+                  <div className={styles.itemHeader}>
+                    <span className={styles.itemName}>{item.name}</span>
+                    <div className={styles.itemDots}></div>
+                    <span className={styles.itemPrice}>{item.price}</span>
+                  </div>
+                  <p className={styles.itemDescription}>{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div 
+          ref={contentRef}
+          className={`${styles.expandableContent} ${showAll ? styles.expanded : ''}`}
+        >
+          <div className={styles.fullMenu}>
             {menuCategories.map((category, catIndex) => (
               <div key={catIndex} className={styles.categorySection}>
                 <h3 className={styles.categoryTitle}>{category.category}</h3>
@@ -179,7 +203,7 @@ export default function MenuSection() {
               </div>
             ))}
           </div>
-        )}
+        </div>
 
         <div className={styles.buttonContainer}>
           <button 
